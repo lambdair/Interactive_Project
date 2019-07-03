@@ -3,9 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class OpenDoor : MonoBehaviour {
-    float y_rotation=0.0f;
+    float y_rotation = 0.0f;
     bool OpenChack = false;
     float OffSetRotation = 2.0f;
+
+    public AudioClip openSound;
+    public AudioClip closeSound;
+    AudioSource openAudioSource;
+    AudioSource closeAudioSource;
+
+    void Start () {
+        openAudioSource = GetComponent<AudioSource>();
+        closeAudioSource = GetComponent<AudioSource>();
+    }
 
     public void Open( ) {
         StartCoroutine(D_Open( ));
@@ -23,6 +33,7 @@ public class OpenDoor : MonoBehaviour {
             this.gameObject.transform.eulerAngles = new Vector3(0.0f, 120.0f, 0.0f);
 
             OpenChack = true;
+            openAudioSource.PlayOneShot(openSound);
         }
         else {
             while (true) {
@@ -35,6 +46,7 @@ public class OpenDoor : MonoBehaviour {
             this.gameObject.transform.eulerAngles = new Vector3(0.0f, 0.0f, 0.0f);
 
             OpenChack = false;
+            closeAudioSource.PlayOneShot(closeSound);
         }
     }
 }
