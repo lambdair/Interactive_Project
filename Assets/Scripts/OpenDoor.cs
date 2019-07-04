@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class OpenDoor : MonoBehaviour {
-    float y_rotation=0.0f;
+    float y_rotation = 0.0f;
     bool OpenChack = false;
     float OffSetRotation = 2.0f;
 
