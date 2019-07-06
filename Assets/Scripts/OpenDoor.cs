@@ -19,8 +19,7 @@ public class OpenDoor : MonoBehaviour {
         if (CanOpen) {
             StartCoroutine(D_Open( ));
             O_D.Play( );
-        }
-        else {
+        } else {
             C_D.Play( );
         }
     }

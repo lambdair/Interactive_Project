@@ -21,7 +21,8 @@ public class ControllerGrabAndPush : MonoBehaviour {
     private GameCtrBotton GCB;
     private OpenSmallWindow OSW;
     private ChangeParsonScale CPS;
-    private OpenDoor OD; 
+    private OpenDoor OD;
+    private Keypad KP;
 
     private void Start( ) {
         trackedObj = GetComponent<SteamVR_TrackedObject>( );
@@ -32,6 +33,7 @@ public class ControllerGrabAndPush : MonoBehaviour {
         OSW = GameObject.Find("Furniture/MainFurniture/TVSet").GetComponent<OpenSmallWindow>( );
         CPS = GameObject.Find("[CameraRig]").GetComponent<ChangeParsonScale>( );
         OD = GameObject.Find("Furniture/MainFurniture/Door").GetComponent<OpenDoor>( );
+        KP = GameObject.Find("Furniture/MainFurniture/keypad/Cube").GetComponent<Keypad>();
     }
 
     private void SetCollidingObject(Collider collider) {
@@ -109,75 +111,64 @@ public class ControllerGrabAndPush : MonoBehaviour {
 
     private void KeyPadEnter(Collider other) {
         if (other.gameObject.name == "K_Button_1") {
-            Controller.TriggerHapticPulse(2000);
             ButtonSound.Play( );
-
+            Controller.TriggerHapticPulse(2000);
+            KP.pushNumberKey(1);
         }
         if (other.gameObject.name == "K_Button_2") {
             ButtonSound.Play( );
             Controller.TriggerHapticPulse(2000);
-
-
+            KP.pushNumberKey(2);
         }
         if (other.gameObject.name == "K_Button_3") {
             ButtonSound.Play( );
             Controller.TriggerHapticPulse(2000);
-
-
+            KP.pushNumberKey(3);
         }
         if (other.gameObject.name == "K_Button_4") {
             ButtonSound.Play( );
             Controller.TriggerHapticPulse(2000);
-
-
+            KP.pushNumberKey(4);
         }
         if (other.gameObject.name == "K_Button_5") {
             ButtonSound.Play( );
             Controller.TriggerHapticPulse(2000);
-
-
+            KP.pushNumberKey(5);
         }
         if (other.gameObject.name == "K_Button_6") {
             ButtonSound.Play( );
             Controller.TriggerHapticPulse(2000);
-
-
+            KP.pushNumberKey(6);
         }
         if (other.gameObject.name == "K_Button_7") {
             ButtonSound.Play( );
             Controller.TriggerHapticPulse(2000);
-
-
+            KP.pushNumberKey(7);
         }
         if (other.gameObject.name == "K_Button_8") {
             ButtonSound.Play( );
             Controller.TriggerHapticPulse(2000);
-
-
+            KP.pushNumberKey(8);
         }
         if (other.gameObject.name == "K_Button_9") {
             ButtonSound.Play( );
             Controller.TriggerHapticPulse(2000);
-
-
+            KP.pushNumberKey(9);
         }
         if (other.gameObject.name == "K_Button_0") {
             ButtonSound.Play( );
             Controller.TriggerHapticPulse(2000);
-
-
+            KP.pushNumberKey(0);
         }
         if (other.gameObject.name == "K_Button_Green") {
             ButtonSound.Play( );
             Controller.TriggerHapticPulse(2000);
-
-
+            KP.pushGreenKey();
         }
         if (other.gameObject.name == "K_Button_Red") {
             ButtonSound.Play( );
             Controller.TriggerHapticPulse(2000);
-
-
+            KP.pushRedKey();
         }
     }
 
