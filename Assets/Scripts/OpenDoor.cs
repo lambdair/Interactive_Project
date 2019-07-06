@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,11 +9,13 @@ public class OpenDoor : MonoBehaviour {
     AudioSource O_D;
     AudioSource C_D;
     AudioSource nature;
+    Score score;
 
     void Start( ) {
         O_D = GameObject.Find("Furniture/MainFurniture/Door").GetComponent<AudioSource>( );
         C_D = GameObject.Find("Furniture/MainFurniture/Door/Bord").GetComponent<AudioSource>( );
         nature = GameObject.Find("nature/Audio Source").GetComponent<AudioSource>();
+        score = GameObject.Find("Score/Time").GetComponent<Score>();
     }
 
     public void Open( ) {
@@ -21,7 +23,7 @@ public class OpenDoor : MonoBehaviour {
         if (CanOpen) {
             StartCoroutine(D_Open( ));
             O_D.Play( );
-            nature.Play();
+            StartCoroutine(ending());
         } else {
             C_D.Play( );
         }
@@ -36,5 +38,12 @@ public class OpenDoor : MonoBehaviour {
             yield return null;
             }
         this.gameObject.transform.eulerAngles = new Vector3(0.0f, 120.0f, 0.0f);
+    }
+
+    public IEnumerator ending()
+    {
+        nature.Play();
+        yield return new WaitForSeconds(7);
+        score.displayScore();
     }
 }

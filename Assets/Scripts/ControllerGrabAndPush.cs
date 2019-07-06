@@ -48,7 +48,7 @@ public class ControllerGrabAndPush : MonoBehaviour {
         if (collider.gameObject.name == "RedButton") {
             GCB.ClickRed( );
             Controller.TriggerHapticPulse(2000);
-            Debug.Log("赤"); 
+            Debug.Log("赤");
         }
 
         if (collider.gameObject.name == "BlueButton") {
