@@ -8,10 +8,12 @@ public class OpenDoor : MonoBehaviour {
     public bool CanOpen = false;
     AudioSource O_D;
     AudioSource C_D;
+    AudioSource nature;
 
     void Start( ) {
         O_D = GameObject.Find("Furniture/MainFurniture/Door").GetComponent<AudioSource>( );
         C_D = GameObject.Find("Furniture/MainFurniture/Door/Bord").GetComponent<AudioSource>( );
+        nature = GameObject.Find("nature/Audio Source").GetComponent<AudioSource>();
     }
 
     public void Open( ) {
@@ -19,6 +21,7 @@ public class OpenDoor : MonoBehaviour {
         if (CanOpen) {
             StartCoroutine(D_Open( ));
             O_D.Play( );
+            nature.Play();
         } else {
             C_D.Play( );
         }
