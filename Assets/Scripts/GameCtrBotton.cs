@@ -10,15 +10,19 @@ public class GameCtrBotton : MonoBehaviour {
     bool ChackInput = false;
     bool ChackCorrect = false;
     OpenBox O_Box;
+    GameObject OB;
     GameObject redButton;
     GameObject blueButton;
     GameObject greenButton;
+    public AudioClip Collect;
+    public AudioClip False;
 
     void Start( ) {
-        O_Box = GameObject.Find("Furniture/SubFurniture/Box/Open").GetComponent<OpenBox>( );
-        redButton = GameObject.Find("RedButton");
-        blueButton = GameObject.Find("BlueButton");
-        greenButton = GameObject.Find("GreenButton");
+        OB = GameObject.Find("Furniture/SubFurniture/Box/Open");
+        O_Box= OB.GetComponent<OpenBox>( );
+        redButton = GameObject.Find("Walls/MainWalls/BottonSet/RedButton");
+        blueButton = GameObject.Find("Walls/MainWalls/BottonSet/BlueButton");
+        greenButton = GameObject.Find("Walls/MainWalls/BottonSet/GreenButton");
     }
 
     public void ClickRed( ) {
@@ -48,6 +52,12 @@ public class GameCtrBotton : MonoBehaviour {
         }
     }
 
+    IEnumerator D_Sound( ) {
+        yield return new WaitForSeconds(3);
+
+        OB.GetComponent<AudioSource>( ).Play( );
+    }
+
     void Check( ) {
         if (NowCount == 6) {
             for (int i = 0; i < 6; i++) {
@@ -67,6 +77,7 @@ public class GameCtrBotton : MonoBehaviour {
                 ChackInput = true;
             }
             else {
+                GetComponent<AudioSource>( ).PlayOneShot(False);
                 Debug.Log("やり直し");
                 for (int i = 0; i < 6; i++) {
                     Number[i] = 0;
@@ -78,6 +89,8 @@ public class GameCtrBotton : MonoBehaviour {
 
     void KeyCreate( ) {
         Debug.Log("Open");
+        GetComponent<AudioSource>().PlayOneShot(Collect);
         O_Box.Box_Open( );
+        StartCoroutine(D_Sound( ));
     }
 }

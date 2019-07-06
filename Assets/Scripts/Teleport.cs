@@ -16,9 +16,11 @@ public class Teleport : MonoBehaviour {
     public Transform headTransform;
     private Vector3 teleportReticleOffset;
     public LayerMask teleportMask;
+    public LayerMask Defalt;
     private bool shouldTeleport;
     private Vector3 difference;
     private RaycastHit hit;
+    private ChangeParsonScale CPS;
 
     void Start( ) {
         trackedObj = GetComponent<SteamVR_TrackedObject>( );
@@ -26,6 +28,7 @@ public class Teleport : MonoBehaviour {
         teleportReticleTransform = reticle.transform;
         reticle.SetActive(false);
         teleportReticleOffset = new Vector3(0.0f, 0.0125f, 0.0f);
+        CPS = GameObject.Find("[CameraRig]").GetComponent<ChangeParsonScale>( );
     }
 
     private void P_Teleport( ) {
@@ -37,8 +40,17 @@ public class Teleport : MonoBehaviour {
     }
 
     void Update( ) {
+        if (!CPS.SmallFlag) {
+            teleportReticleTransform.localScale = new Vector3(0.2f, 0.025f, 0.2f);
+            teleportReticleOffset = new Vector3(0.0f, 0.0125f, 0.0f);
+        }
+        else {
+            teleportReticleTransform.localScale = new Vector3(0.08f, 0.01f, 0.08f);
+            teleportReticleOffset = new Vector3(0.0f, 0.005f, 0.0f);
+        }
+
         if (Controller.GetHairTrigger()) {
-            if (Physics.Raycast(trackedObj.transform.position, transform.forward, out hit, 100, teleportMask)) {
+            if (Physics.Raycast(trackedObj.transform.position, transform.forward, out hit, 50, teleportMask)) {
                 hitPoint = hit.point;
                 reticle.SetActive(true);
                 teleportReticleTransform.position = hitPoint + teleportReticleOffset;
@@ -46,6 +58,7 @@ public class Teleport : MonoBehaviour {
             }
             else {
                 reticle.SetActive(false);
+                shouldTeleport = false;
             }
         }
 
