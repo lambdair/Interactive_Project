@@ -13,6 +13,7 @@ public class Keypad : MonoBehaviour
     OpenDoor doorFlag;
     TextMeshProUGUI displayText;
     AudioSource unlock;
+    GameObject nature;
 
     void Start()
     {
@@ -20,6 +21,8 @@ public class Keypad : MonoBehaviour
         displayText = GameObject.Find("Furniture/MainFurniture/keypad/Display").GetComponent<TextMeshProUGUI>();
         displayText.text = "";
         unlock = GameObject.Find("Furniture/MainFurniture/Door/Bord").GetComponent<AudioSource>();
+        nature = GameObject.Find("nature");
+        nature.SetActive(false);
     }
 
     public void pushNumberKey(int number)
@@ -34,6 +37,7 @@ public class Keypad : MonoBehaviour
         if(check) {
             doorFlag.CanOpen = true;
             unlock.Play();
+            nature.SetActive(true);
         }
         displayText.text = "";
     }
